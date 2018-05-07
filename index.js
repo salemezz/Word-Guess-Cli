@@ -1,25 +1,27 @@
-
 var inquirer = require("inquirer");
-var possibleWords = ["Chinchilla", "Doom", "ffdf"];
+var possibleWords = ["chinchilla", "doom", "ffdf"];
 var Word = require('./word.js');
 var letter = require('./letter.js');
+
 var guesses = 12;
-inquirer
-  .prompt([
-    {
-      type: "input",
-      message: "pick a username.",
-      name: "name"
-    }
-  ])
-  .then(function (user) {
-    console.log(user.name);
-    game.init();
-    game.printWord();
-    enterLetter();
-  });
+var word = new Word(possibleWords[Math.floor(Math.random() * possibleWords.length + 1)]);
+
+enterLetter();
+
+function printWord() {
+  console.log(word.renderWord());
+}
+
+function checkWord(guess) {
+  if (!this.guessed) {
+    guesses--;
+    console.log("Nope, you have " + guesses + " left.");
+  }
+  word.checkGuess(guess);
+}
 
 function enterLetter() {
+  printWord();
   inquirer
     .prompt([
       {
@@ -29,30 +31,17 @@ function enterLetter() {
       }
     ])
     .then(function (input) {
-      var guess = input.guess;
-      game.checkWord(guess);
+      checkWord(input.guess);
+      if(guesses === 0) {
+        console.log("You lose");
+      } else if(word.guessed) {
+        console.log("You win");
+      } else{
+        enterLetter();
+      }      
     });
 }
-var word = new Word(possibleWords[Math.floor(Math.random() * possibleWords.length + 1)]);
-var game = {
-  init:function() {
-    guesses = 12;
-  },
-  printWord:function() {
-      console.log(word.renderWord());
 
-  },
-  checkWord:function(guess) {
-
-    if (!this.guessed) {
-      guesses--;
-      console.log("Nope, you have " + guesses + " left.");
-    }
-    word.checkGuess(guess);
-    game.printWord();
-    enterLetter();
-  }
-}
 
 
 
