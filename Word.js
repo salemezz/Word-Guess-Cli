@@ -17,15 +17,16 @@ var Letter = require('./letter.js');
             },
             this.checkGuess = function (guess) {
                 var guessedLetters = 0;
+
                 for (var i = 0; i < letters.length; i++) {
                     letters[i].guessLetter(guess);
                     if(letters[i].guessed) {
                         guessedLetters++;
-                    }
+                    } 
                 }
-                if(guessedLetters === letters.length) {
+                if (guessedLetters === letters.length) {
                     this.guessed = true;
-                }
+                } 
             }
     }
 }

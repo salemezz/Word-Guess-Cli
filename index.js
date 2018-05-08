@@ -1,5 +1,5 @@
 var inquirer = require("inquirer");
-var possibleWords = ["chinchilla", "doom", "ffdf"];
+var possibleWords = ["tetris", "pong", "space invaders", "zelda", "donkey kong"];
 var Word = require('./word.js');
 var letter = require('./letter.js');
 
@@ -10,14 +10,6 @@ enterLetter();
 
 function printWord() {
   console.log(word.renderWord());
-}
-
-function checkWord(guess) {
-  if (!this.guessed) {
-    guesses--;
-    console.log("Nope, you have " + guesses + " left.");
-  }
-  word.checkGuess(guess);
 }
 
 function enterLetter() {
@@ -31,12 +23,15 @@ function enterLetter() {
       }
     ])
     .then(function (input) {
-      checkWord(input.guess);
+      word.checkGuess(input.guess);
       if(guesses === 0) {
         console.log("You lose");
       } else if(word.guessed) {
+        printWord();
         console.log("You win");
       } else{
+        guesses--;
+        console.log("you have " + guesses + " guesses left.");
         enterLetter();
       }      
     });
