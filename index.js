@@ -17,7 +17,7 @@ function enterLetter() {
     .prompt([
       {
         type: "input",
-        message: "pick a letter.",
+        message: "Pick a letter.",
         name: "guess"
       }
     ])
@@ -25,13 +25,12 @@ function enterLetter() {
       word.checkGuess(input.guess);
       if (word.guessed) {
         printWord();
-        console.log("You win");
+        console.log("You win.");
       } else if (guesses === 0) {
-        console.log("You Lose.");
+        console.log("You lose.");
       }
       else {
         guesses--;
-        // console.log(word.letters[i].guessed);
         console.log(guesses + " guesses left.");
         enterLetter();
       }
