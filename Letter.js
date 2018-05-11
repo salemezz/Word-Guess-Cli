@@ -13,7 +13,6 @@
             this.guessLetter = function (guess) {
                 if (letter === guess) {
                     this.guessed = true;
-                    // console.log("and " + guess);
                 }
             }
         }

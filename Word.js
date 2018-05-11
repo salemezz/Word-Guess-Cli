@@ -7,7 +7,7 @@ var Letter = require('./letter.js');
             letters.push(new Letter(letterOfWord));
         }
         this.guessed = false,
-        this.letters = letters,
+            this.letters = letters,
             this.renderWord = function () {
                 var renderedWord = "";
                 for (var i = 0; i < letters.length; i++) {
@@ -17,10 +17,9 @@ var Letter = require('./letter.js');
             },
             this.checkGuess = function (guess) {
                 var guessedLetters = 0;
-
                 for (var i = 0; i < letters.length; i++) {
                     letters[i].guessLetter(guess);
-                    if(letters[i].guessed) {
+                    if (letters[i].guessed) {
                         guessedLetters++;
                     } 
                 }
